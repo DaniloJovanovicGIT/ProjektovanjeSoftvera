@@ -1,2 +1,2 @@
 # ProjektovanjeSoftvera
-Seminarski rad iz predmeta Projektovanje Softvera FON
+Odradjeni ispitni rokovi Projektovanje Softvera
