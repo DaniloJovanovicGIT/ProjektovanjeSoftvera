@@ -4,13 +4,13 @@
  */
 package transfer;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Danilo
  */
-public class Operacija implements Serializable{
-    public static final int LOGIN = 2;
-    public static final int VRATI_FESTIVALE=3;
+public class Operacija {
+    public static final int LOGIN = 1;
+    public static final int VRATI_FESTIVALE=2;
+    public static final int VRATI_DELA=3;
+    public static final int IZMENI_FESTIVAL=4;
 }

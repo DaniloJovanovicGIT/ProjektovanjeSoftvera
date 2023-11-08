@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author Danilo
  */
-public class PokretanjeServera extends  Thread{
+public class PokretanjeServera extends Thread{
 
     @Override
     public void run() {
