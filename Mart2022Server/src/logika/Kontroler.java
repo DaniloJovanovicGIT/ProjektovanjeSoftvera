@@ -4,8 +4,6 @@
  */
 package logika;
 
-import db.DBBroker;
-import domen.Festival;
 import domen.Korisnik;
 import java.util.ArrayList;
 
@@ -14,41 +12,32 @@ import java.util.ArrayList;
  * @author Danilo
  */
 public class Kontroler {
-
-    DBBroker db;
-    private static Kontroler instance;
+    private DBBRoker db;
+    private static Kontroler instanca;
     ArrayList<Korisnik> korisnici;
-
+    
+    
     private Kontroler() {
-        db = new DBBroker();
+        db = new DBBRoker();
         korisnici = new ArrayList<>();
-        korisnici.add(new Korisnik("admin", "admin"));
         korisnici.add(new Korisnik("danilo", "danilo"));
+        korisnici.add(new Korisnik("admin", "admin"));
     }
 
-    public static Kontroler getInstance() {
-        if (instance == null) {
-            instance = new Kontroler();
+    public static Kontroler getInstanca() {
+        if (instanca == null) {
+            instanca = new Kontroler();
         }
-        return instance;
+        return instanca;
     }
 
-    public boolean login(Korisnik k) {
+    public Korisnik ulogujKorinsika(Korisnik k) {
         for (Korisnik korisnik : korisnici) {
-            if (k.getUsername().equals(korisnik.getUsername()) && k.getLozinka().equals(korisnik.getLozinka())) {
-                return true;
+            if(k.getUsername().equals(korisnik.getUsername())&&k.getLozinka().equals(korisnik.getLozinka())){
+                return korisnik;
             }
         }
-        return false;
-    }
-
-    public ArrayList<Festival> vratiSveFestivale() {
-        ArrayList<Festival> lista = new ArrayList<>();
-        db.otvoriKonekciju();
-        lista = db.vratiSveFestivale();
-        db.commit();
-        db.zatvoriKonekciju();
-        return lista;
+        return null;
     }
 
 }
