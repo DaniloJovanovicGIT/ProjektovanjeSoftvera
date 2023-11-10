@@ -63,4 +63,9 @@ public class ModelTabeleAngazovanja extends AbstractTableModel {
         }
     }
 
+    public void dodaj(Angazovanje angazovanje) {
+        lista.add(angazovanje);
+        fireTableDataChanged();
+    }
+
 }
