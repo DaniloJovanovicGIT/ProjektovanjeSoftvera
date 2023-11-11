@@ -274,6 +274,11 @@ public class GlavnaForma extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblAngazovanja);
 
         jButton3.setText("Dodaj");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Izmeni");
 
@@ -435,6 +440,11 @@ public class GlavnaForma extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Profesor profesor = (Profesor) cmbProfesorAngazovanja.getSelectedItem();
+        DodajAngazovanjeZaProfesora dap = new DodajAngazovanjeZaProfesora(this, rootPaneCheckingEnabled, profesor, ulogovani);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -496,5 +506,10 @@ public class GlavnaForma extends javax.swing.JFrame {
                 cmbProfesorAngazovanja.addItem(profesor);
             }
         }
+    }
+
+    void dodajAngazovanje(Angazovanje angazovanje) {
+        ModelTabeleAngazovanja mta = (ModelTabeleAngazovanja) tblAngazovanja.getModel();
+        mta.dodaj(angazovanje);
     }
 }
