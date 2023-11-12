@@ -19,7 +19,7 @@ import transfer.Zahtev;
  * @author Danilo
  */
 public class GlavnaForma extends javax.swing.JFrame {
-    
+
     Korisnik ulogovani;
 
     /**
@@ -215,9 +215,9 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void popuniUlogovaneKorisnike() {
         Komunikacija.getInstance().posaljiZahtev(new Zahtev(Operacija.VRATI_ULOGOVANE, null));
-        
+
     }
-    
+
     public void popuniUlogovane(ArrayList<String> listaUlogovanih) {
         cmbAktivniKorisnici.removeAllItems();
         cmbAktivniKorisnici.addItem("svima");
@@ -225,12 +225,12 @@ public class GlavnaForma extends javax.swing.JFrame {
             cmbAktivniKorisnici.addItem(string);
         }
     }
-    
+
     public void pihvatiOdjavu() {
         JOptionPane.showMessageDialog(this, "Server je ugasen, pokusajte kasnije");
         System.exit(0);
     }
-    
+
     public void obradiPoslataPoruka(boolean uspesnoPoslato) {
         if (uspesnoPoslato) {
             JOptionPane.showMessageDialog(this, "Uspesno poslato");
@@ -240,16 +240,18 @@ public class GlavnaForma extends javax.swing.JFrame {
     }
 
     public void obradiPopuniPoruke(ArrayList<Poruka> listPoruka) {
-        int brojac = 1;
-        cmbPoslednjeTri.removeAllItems();
-        cmbOstale.removeAllItems();
-        for (Poruka poruka : listPoruka) {
-            if (brojac <= 3) {
-                cmbPoslednjeTri.addItem(poruka);
-            } else {
-                cmbOstale.addItem(poruka);
+        if (listPoruka != null) {
+            int brojac = 1;
+            cmbPoslednjeTri.removeAllItems();
+            cmbOstale.removeAllItems();
+            for (Poruka poruka : listPoruka) {
+                if (brojac <= 3) {
+                    cmbPoslednjeTri.addItem(poruka);
+                } else {
+                    cmbOstale.addItem(poruka);
+                }
+                brojac++;
             }
-            brojac++;
         }
     }
 

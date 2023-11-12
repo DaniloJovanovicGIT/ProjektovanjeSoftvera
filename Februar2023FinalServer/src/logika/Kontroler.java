@@ -87,17 +87,22 @@ public class Kontroler {
 
     public Korisnik loginKorisnika(Korisnik korisnik, Socket socket) {
         db.otvoriKonekciju();
+        ArrayList<Korisnik> listaKorisnika;
         try {
-            ArrayList<Korisnik> listaKorisnika = db.vratiKOrisnike();
+            listaKorisnika = db.vratiKorisnike();
             for (Korisnik korisnikBaza : listaKorisnika) {
                 if (korisnik.getKorisnickoIme().equals(korisnikBaza.getKorisnickoIme()) && korisnik.getKorisnickaLozinka().equals(korisnikBaza.getKorisnickaLozinka())) {
                     mapaUlogovanih.put(korisnikBaza.getKorisnickoIme(), socket);
                     obavestiSve();
+                    db.commit();
                     return korisnikBaza;
                 }
             }
         } catch (SQLException ex) {
+            db.rollback();
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.zatvoriKonekciju();
         }
         return null;
     }
@@ -148,8 +153,7 @@ public class Kontroler {
             uspesno = true;
         } catch (SQLException ex) {
             db.rollback();
-
-            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, "SQL", ex);
         } finally {
             db.zatvoriKonekciju();
         }
